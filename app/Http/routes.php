@@ -19,3 +19,8 @@ Route::resource('customers','CustomerController');
 Route::resource('stocks','StockController');
 Route::resource('investments','InvestmentController');
 
+
+
+Route::auth();
+Route::get('user/activation/{token}', 'Auth\AuthController@activateUser')->name('user.activate');
+Route::get('/home', 'HomeController@index');
