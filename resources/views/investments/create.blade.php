@@ -28,7 +28,7 @@
         {!! Form::text('recent_value',null,['class'=>'form-control']) !!}
     </div>
     <div class="form-group">
-        {!! Form::label('recent_date', 'Recent Value:') !!}
+        {!! Form::label('recent_date', 'Recent Date:') !!}
         {!! Form::text('recent_date',null,['class'=>'form-control']) !!}
     </div>
 

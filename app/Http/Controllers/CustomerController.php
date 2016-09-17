@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Customer;
+use App\Stock;
+use App\Investment;
 
 class CustomerController extends Controller
 {
@@ -24,7 +26,9 @@ class CustomerController extends Controller
     public function show($id)
     {
         $customer = Customer::findOrFail($id);
-        return view('customers.show',compact('customer'));
+        $stocks = Stock::where('customer_id', $id)->get();
+        $investments = Investment::where('customer_id', $id)->get();
+        return view('customers.show', ['customer' => $customer, 'stocks' => $stocks, 'investments' => $investments]);
     }
 
 
