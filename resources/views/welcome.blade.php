@@ -57,7 +57,7 @@
             <div class="content">
                 <div class="image">
                     <a href="customers">
-                    <img src="https://pixabay.com/static/uploads/photo/2016/02/22/10/06/hedgehog-1215140_960_720.jpg" alt="Image missing" style="width:960;height:637;">
+                    <img src="{{asset('hedgehog-1215140_960_720.jpg')}}" alt="Image missing" style="width:960;height:637;">
                     </a>
                 </div>
 
