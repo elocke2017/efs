@@ -63,8 +63,6 @@
         $stockindvalue = 0; //Individual stock value (#shares * purchase_price)
         $sinitial = 0; //Total initial stocks
         $svalue=0; //Total current stocks
-        $itotal = 0;
-        $ivalue=0;
         $iportfolio = 0;
         $cportfolio = 0;
         ?>
@@ -72,7 +70,23 @@
             <?php
             $stockindvalue = $stock['shares']*$stock['purchase_price'];
             $sinitial = $sinitial + $stockindvalue;
-            $svalue = $svalue + $stockindvalue;
+            $ssymbol = $stock['symbol'];
+            $URL = "http://www.google.com/finance/info?q=NSE:" . $ssymbol;
+            $file = fopen("$URL", "r");
+            $r = "";
+            do {
+                $data = fread($file, 500);
+                $r .= $data;
+            } while (strlen($data) != 0);
+            //Remove CR's from ouput - make it one line
+            $json = str_replace("\n", "", $r);
+            //Remove //, [ and ] to build qualified string
+            $data = substr($json, 4, strlen($json) - 5);
+            //decode JSON data
+            $json_output = json_decode($data, true);
+            //echo $sstring, "<br>   ";
+            $price = "\n" . $json_output['l'];
+            $svalue = $svalue + $stock->shares*$price;
             ?>
             <tr>
                 <td>{{ $stock->symbol }}</td>
@@ -80,19 +94,21 @@
                 <td>{{ $stock->shares }}</td>
                 <td><?php echo number_format($stock->purchase_price, 2)?></td>
                 <td>{{ $stock->purchased }}</td>
-                <td>$<?php echo number_format($stockindvalue, 2 )?></td>
-                <td></td>
-                <td></td>
+                <td>$<?php echo number_format($stockindvalue, 2)?></td>
+                <td>$<?php echo $price?></td>
+                <td>$<?php echo number_format($price*$stock->shares, 2) ?></td>
              </tr>
         @endforeach
         </tbody>
     </table>
-    <h4>Total of Initial Stock Portfolio: $<?php echo number_format($sinitial, 2)?></h4>
-    <h4>Total of Current Stock Portfolio: $ </h4>
+    <h4>Total of Initial Stock Portfolio: $<?php echo number_format($sinitial, 2)?> </h4>
+    <h4>Total of Current Stock Portfolio: $<?php echo number_format($svalue, 2)?> </h4>
+
+
 
     <h3>{{$customer->name}}'s Investments</h3>
     <hr>
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover ", table style="text-align:center;">
         <thead>
         <tr class="bg-info">
             <th>Category</th>
@@ -105,12 +121,16 @@
         </thead>
         <tbody>
         @foreach ($investments as $investment)
+            <?php
+            $iportfolio = $iportfolio + $investment['acquired_value'];
+            $cportfolio = $cportfolio + $investment['recent_value'];
+            ?>
             <tr>
                 <td>{{ $investment->category }}</td>
                 <td>{{ $investment->description }}</td>
-                <td>{{ $investment->acquired_value }}</td>
+                <td>$<?php echo number_format($investment->acquired_value, 2)?></td>
                 <td>{{ $investment->acquired_date }}</td>
-                <td>{{ $investment->recent_value }}</td>
+                <td>$<?php echo number_format($investment->recent_value, 2)?></td>
                 <td>{{ $investment->recent_date }}</td>
                 </td>
             </tr>
@@ -118,5 +138,11 @@
         </tbody>
 
     </table>
+    <h4>Total of Initial Investment Portfolio: $<?php echo number_format($iportfolio, 2)?> </h4>
+    <h4>Total of Current Investment Portfolio: $<?php echo number_format($cportfolio, 2)?> </h4>
+    <br><br>
+    <h2>Summary</h2>
+    <h3>Total of Initial Portfolio: $<?php echo number_format($sinitial+$iportfolio, 2)?> </h3>
+    <h3>Total of Current Portfolio: $<?php echo number_format($svalue+$cportfolio, 2)?> </h3>
 
 @stop

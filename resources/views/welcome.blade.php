@@ -56,7 +56,7 @@
 
             <div class="content">
                 <div class="image">
-                    <a href="customers">
+                    <a href="home">
                     <img src="{{asset('hedgehog-1215140_960_720.jpg')}}" alt="Image missing" style="width:960;height:637;">
                     </a>
                 </div>

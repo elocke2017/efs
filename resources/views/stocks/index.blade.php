@@ -37,15 +37,5 @@
             </tr>
         @endforeach
 
-        </tbody>
-        <h3>Stock Symbol: <br>
-            <form action="squote2_rest.php" method="POST">
-                <input type="text" name="stquote">
-                <br>
-                <br>
-                <input type="submit" value="Click here to get quote">
-            </form>
-        </h3>
-
     </table>
 @endsection

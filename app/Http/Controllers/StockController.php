@@ -78,4 +78,11 @@ class StockController extends Controller
         Stock::find($id)->delete();
         return redirect('stocks');
     }
+
+    public function squote_rest()
+    {
+
+        $customers = Customer::lists('name','id');
+        return view('stocks.create', compact('customers'));
+    }
 }

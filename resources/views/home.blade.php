@@ -10,6 +10,15 @@
                 <div class="panel-body">
                     You are logged in!
                 </div>
+                <div class="panel-body">
+                    <a href="{{ url('/customers') }}">Customers</a>
+                </div>
+                <div class="panel-body">
+                    <a href="{{ url('/stocks') }}">Stocks</a>
+                </div>
+                <div class="panel-body">
+                    <a href="{{ url('/investments') }}">Investments</a>
+                </div>
             </div>
         </div>
     </div>
