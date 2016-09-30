@@ -43,30 +43,52 @@
 
     <h3>{{$customer->name}}'s Stocks</h3>
     <hr>
-    <table class="table table-striped table-bordered table-hover">
+    <table class="table table-striped table-bordered table-hover ", table style="text-align:center;">
         <thead>
         <tr class="bg-info">
             <th>Symbol</th>
             <th>Name</th>
             <th>Shares</th>
-            <th>Purchase price</th>
+            <th>Purchase Price</th>
             <th>Purchase Date</th>
+            <th>Original Value</th>
+            <th>Current Price</th>
+            <th>Current Value</th>
         </tr>
         </thead>
         <tbody>
+
+        <?php
+        $stockprice=null;
+        $stockindvalue = 0; //Individual stock value (#shares * purchase_price)
+        $sinitial = 0; //Total initial stocks
+        $svalue=0; //Total current stocks
+        $itotal = 0;
+        $ivalue=0;
+        $iportfolio = 0;
+        $cportfolio = 0;
+        ?>
         @foreach ($stocks as $stock)
+            <?php
+            $stockindvalue = $stock['shares']*$stock['purchase_price'];
+            $sinitial = $sinitial + $stockindvalue;
+            $svalue = $svalue + $stockindvalue;
+            ?>
             <tr>
                 <td>{{ $stock->symbol }}</td>
                 <td>{{ $stock->name }}</td>
                 <td>{{ $stock->shares }}</td>
-                <td>{{ $stock->purchase_price }}</td>
+                <td><?php echo number_format($stock->purchase_price, 2)?></td>
                 <td>{{ $stock->purchased }}</td>
+                <td>$<?php echo number_format($stockindvalue, 2 )?></td>
+                <td></td>
+                <td></td>
              </tr>
         @endforeach
-
         </tbody>
-
     </table>
+    <h4>Total of Initial Stock Portfolio: $<?php echo number_format($sinitial, 2)?></h4>
+    <h4>Total of Current Stock Portfolio: $ </h4>
 
     <h3>{{$customer->name}}'s Investments</h3>
     <hr>

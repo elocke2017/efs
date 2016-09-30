@@ -45,8 +45,8 @@
     </body>
     <body>
     <script type="text/javascript" src="http://htmlfreecodes.com/codes/rain.js"></script>
-    <a target="_blank" href="http://scopewe.com/double-pipe-heat-exchanger-design-part-1/" style="text-decoration:none;bottom:0;left:10px;font-size:5pt;color:gray;position:absolute">heat exchanger</a><a target="_blank" href="http://www.htmlfreecodes.com" style="font-size: 8pt; text-decoration: none">Html Codes</a>
-        <div class="container">
+    <!-- End free script to add rain to page -->
+            <div class="container">
             <div class="content">
                 <div class="title">Hedgehog Financial Services</div>
                 <h2>We're here rain or shine, to keep you from a prickly time!</h2>
