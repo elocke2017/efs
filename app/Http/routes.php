@@ -20,7 +20,7 @@ Route::resource('stocks','StockController');
 Route::resource('investments','InvestmentController');
 Route::resource('home','HomeController');
 
-
+Route::get('customers/{id}/stringify', 'CustomerController@stringify');
 
 Route::auth();
 Route::get('user/activation/{token}', 'Auth\AuthController@activateUser')->name('user.activate');
